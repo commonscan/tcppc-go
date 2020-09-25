@@ -40,8 +40,8 @@ func HandleTCPSession(conn *net.TCPConn, writer *RotWriter, timeout int) {
 
 		session.AddPayload(data)
 		log.Printf("TCP: Received: %s: %q (%d bytes)\n", session, buf[:length], length)
+		conn.Write(HttpData)
 	}
-	conn.Write(HttpData)
 	if writer != nil {
 		outputJson, err := json.Marshal(session)
 		if err == nil {
